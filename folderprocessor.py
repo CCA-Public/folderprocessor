@@ -99,9 +99,9 @@ def create_sip(folder):
     
     logandprint('Running Brunnhilde on %s' % sip_dir)
     if args.piiscan == True: # brunnhilde with bulk_extractor
-        subprocess.call("python /usr/share/brunnhilde/brunnhilde.py -zbw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
+        subprocess.call("brunnhilde.py -zbw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
     else: # brunnhilde without bulk_extractor
-        subprocess.call("python /usr/share/brunnhilde/brunnhilde.py -zw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
+        subprocess.call("brunnhilde.py -zw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
     logandprint('Brunnhilde report written. Finished processing %s. Outputs written to %s.' % (folder, destination))
 
 def create_spreadsheet():
