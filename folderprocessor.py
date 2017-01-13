@@ -226,8 +226,7 @@ try:
     writer.writerow(header_list)
     logandprint('Description spreadsheet created.')
 except:
-    logandprint('There was an error creating the processing spreadsheet.')
-    sys.exit()
+    sys.exit('There was an error creating the processing spreadsheet.')
 
 # process source or its immediate children
 if args.children == True:
