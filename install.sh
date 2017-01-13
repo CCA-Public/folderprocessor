@@ -32,7 +32,7 @@ echo 'Icon=/usr/share/cca-tools/folderprocessor/icon.png' | sudo tee --append '/
 
 # Change permissions, ownership for CCA Tools
 sudo chown -R bcadmin:bcadmin '/home/bcadmin/Desktop/CCA Tools'
-sudo chown -R bcadmin:bcadmin '/usr/share/cca-tools'
+sudo chown -R bcadmin:bcadmin '/usr/share/cca-folderprocessor'
 sudo find '/home/bcadmin/Desktop/CCA Tools' -type d -exec chmod 755 {} \;
 sudo find '/home/bcadmin/Desktop/CCA Tools' -type f -exec chmod 644 {} \;
 
