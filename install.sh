@@ -38,4 +38,4 @@ sudo find '/home/bcadmin/Desktop/CCA Tools' -type f -exec chmod 644 {} \;
 
 # Make files executable
 sudo chmod u+x '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-sudo chmod u+x /usr/share/cca-tools/folderprocessor/launch
+sudo chmod u+x /usr/share/cca-folderprocessor/launch
