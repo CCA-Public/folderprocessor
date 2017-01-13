@@ -209,8 +209,7 @@ try:
     logandprint('Log file started.')
     logandprint('Source of folders: %s' % args.source)
 except:
-    logandprint('There was an error creating the log file.')
-    sys.exit()
+    sys.exit('There was an error creating the log file.')
 
 # open description spreadsheet
 try:
