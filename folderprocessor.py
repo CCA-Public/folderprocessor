@@ -44,7 +44,7 @@ def logandprint(message):
 
 def convert_size(size):
     # convert size to human-readable form
-    if (size == 0):
+    if size == 0:
         return '0 bytes'
     size_name = ("bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
     i = int(math.floor(math.log(size,1024)))
