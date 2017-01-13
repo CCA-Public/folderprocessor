@@ -27,8 +27,8 @@ sudo touch '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
 echo '[Desktop Entry]' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
 echo 'Type=Application' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
 echo 'Name=Folder Processor' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Exec=/usr/share/cca-tools/folderprocessor/launch' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Icon=/usr/share/cca-tools/folderprocessor/icon.png' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
+echo 'Exec=/usr/share/cca-folderprocessor/launch' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
+echo 'Icon=/usr/share/cca-folderprocessor/icon.png' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
 
 # Change permissions, ownership for CCA Tools
 sudo chown -R bcadmin:bcadmin '/home/bcadmin/Desktop/CCA Tools'
