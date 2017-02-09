@@ -208,7 +208,7 @@ log_file = os.path.join(destination, 'folderprocessor-log.txt')
 try:
     log = open(log_file, 'w')   # open the log file
     logandprint('Log file started.')
-    logandprint('Source of folders: %s' % args.source)
+    logandprint('Source of folders: %s' % source)
 except:
     sys.exit('There was an error creating the log file.')
 
@@ -233,11 +233,11 @@ except:
 if args.children == True:
     # get subdirectories
     subdirs = []
-    subdirs = get_immediate_subdirectories(args.source)
+    subdirs = get_immediate_subdirectories(source)
     for subdir in subdirs:
         create_sip(subdir)
 else:
-    create_sip(args.source)
+    create_sip(source)
 
 # write description spreadsheet
 create_spreadsheet()
