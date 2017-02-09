@@ -193,7 +193,8 @@ parser.add_argument("source", help="Path to source directory")
 parser.add_argument("destination", help="Path to save SIPs")
 args = parser.parse_args()
 
-destination = args.destination
+destination = os.path.abspath(args.destination)
+source = os.path.abspath(args.source)
 
 # create output directories
 if not os.path.exists(destination):
