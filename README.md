@@ -1,4 +1,5 @@
-# cca-folderprocessor
+# CCA Folder Processor  
+
 Tool for automated processing of directories in Bitcurator.  
 
 Creates Archivematica-ready SIPs from folders on local filesystem, external media,
