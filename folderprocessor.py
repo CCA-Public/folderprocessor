@@ -78,12 +78,7 @@ def create_sip(folder):
     logandprint('Files successfully rsynced to %s' % sip_dir)
     
     # run Brunnhilde amd write to submissionDocumentation directory
-    if args.bagfiles == True:
-        files_abs = os.path.abspath(os.path.join(sip_dir, 'data', 'objects'))
-        subdoc_dir = os.path.abspath(os.path.join(sip_dir, 'data', 'metadata', 'submissionDocumentation'))
-    else:
-        files_abs = os.path.abspath(object_dir)
-    
+    files_abs = os.path.abspath(object_dir)
     logandprint('Running Brunnhilde on %s' % sip_dir)
     if args.piiscan == True: # brunnhilde with bulk_extractor
         subprocess.call("brunnhilde.py -zbw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
