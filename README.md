@@ -1,6 +1,6 @@
 # CCA Folder Processor  
 
-## Version 1.0  
+## Version 1.0.0  
 
 Tool for automated processing of directories in Bitcurator.  
 
