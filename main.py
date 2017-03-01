@@ -3,7 +3,7 @@
 
 """
 CCA Folder Processor
-Version 2.0
+Version 1.0
 
 Tim Walsh 2017
 MIT License
