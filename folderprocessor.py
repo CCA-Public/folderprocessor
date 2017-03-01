@@ -66,6 +66,7 @@ def create_sip(folder):
 
     sip_dir = os.path.join(sips, basename)
     object_dir = os.path.join(sip_dir, 'objects')
+    original_dir = os.path.join(object_dir, basename)
     metadata_dir = os.path.join(sip_dir, 'metadata')
     subdoc_dir = os.path.join(metadata_dir, 'submissionDocumentation')
 
@@ -73,9 +74,12 @@ def create_sip(folder):
     for newfolder in sip_dir, object_dir, metadata_dir:
         os.makedirs(newfolder)
 
-    # copy files (rsync, don't copy Thumbs.db or .DS_Store)
-    subprocess.call("rsync -avc --stats '%s' '%s'" % (current_dir, object_dir), shell=True)
-    logandprint('Files successfully rsynced to %s' % sip_dir)
+    # copy files
+    try:
+        shutil.copytree(current_dir, original_dir, symlinks=False, ignore=None)
+        logandprint('Files successfully copied to' % original_dir)
+    except:
+        logandprint('WARNING: Error copying files from ' + current_dir + ' to ' + original_dir)
     
     # run Brunnhilde amd write to submissionDocumentation directory
     files_abs = os.path.abspath(object_dir)
