@@ -77,7 +77,7 @@ def create_sip(folder):
     # copy files
     try:
         shutil.copytree(current_dir, original_dir, symlinks=False, ignore=None)
-        logandprint('Files successfully copied to' % original_dir)
+        logandprint('Files successfully copied to ' + original_dir)
     except:
         logandprint('WARNING: Error copying files from ' + current_dir + ' to ' + original_dir)
     
