@@ -81,7 +81,7 @@ def create_sip(folder):
     except:
         logandprint('WARNING: Error copying files from ' + current_dir + ' to ' + original_dir)
     
-    # run Brunnhilde amd write to submissionDocumentation directory
+    # run Brunnhilde and write to submissionDocumentation directory
     files_abs = os.path.abspath(object_dir)
     logandprint('Running Brunnhilde on %s' % sip_dir)
     if args.piiscan == True: # brunnhilde with bulk_extractor
