@@ -8,7 +8,7 @@ CCA Folder Processor creates Archivematica-ready SIPs from directories on a loca
 
 The GUI offers a checkbox interface to select which directories should be turned into SIPs.
 
-CCA Folder Processor creates an md5deep-generated md5 checksum.md5 manifest saved in a metadata directory (according to Archivematica packaging ventions) as default behavior. To create each SIP as a bag instead, select that option from the GUI interface. Folder Processor can optionally also run a PII scan of eahc SIP using bulk_extractor as part of the Brunnhilde characterization step of SIP creation and description. Bulk_extractor results are saved to metadata/submissionDocumentation.  
+CCA Folder Processor creates an md5deep-generated checksum.md5 manifest saved in each SIP's metadata directory (according to Archivematica packaging ventions) as default behavior. To create each SIP as a bag instead, select that option from the GUI interface. Folder Processor can optionally also run a PII scan of each SIP using bulk_extractor as part of the Brunnhilde characterization step of SIP creation and description. Bulk_extractor results are saved to metadata/submissionDocumentation, in the Brunnhilde report output folder.  
 
 ### Installation  
 
