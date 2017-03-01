@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
+    <width>687</width>
     <height>669</height>
    </rect>
   </property>
@@ -14,101 +14,101 @@
    <string>Folder Processor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Source&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="13" column="0" colspan="2">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>24</number>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QLineEdit" name="source1">
-      <property name="placeholderText">
-       <string>/path/to/source</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="source1btn">
-      <property name="text">
-       <string>Browse</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Destination&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="destination1">
-      <property name="placeholderText">
-       <string>/path/to/destination</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="destination1btn">
-      <property name="text">
-       <string>Browse</string>
-      </property>
-     </widget>
-    </item>
-    <item>
+    <item row="9" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Options&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QCheckBox" name="checkBox">
+    <item row="10" column="0">
+     <widget class="QCheckBox" name="bagSIPs">
       <property name="text">
        <string>Bag SIPs</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QCheckBox" name="checkBox_2">
+    <item row="17" column="1">
+     <widget class="QPushButton" name="cancelBtn">
       <property name="text">
-       <string>Create SIPs for each immediate child directory of source</string>
+       <string>Cancel</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QCheckBox" name="checkBox_3">
+    <item row="11" column="0">
+     <widget class="QCheckBox" name="bulkExt">
       <property name="text">
        <string>Run bulk_extractor</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QLabel" name="label_7">
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Detailed output&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Destination&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QTextEdit" name="textEdit"/>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Source&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </item>
-    <item>
+    <item row="8" column="0">
+     <widget class="QLineEdit" name="destination">
+      <property name="placeholderText">
+       <string>/path/to/destination</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit"/>
+    <item row="14" column="0" colspan="2">
+     <widget class="QLineEdit" name="status"/>
     </item>
-    <item>
-     <widget class="QPushButton" name="process">
+    <item row="17" column="0">
+     <widget class="QPushButton" name="processBtn">
       <property name="text">
-       <string>Process disk images</string>
+       <string>Create SIPs</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QPushButton" name="destinationBtn">
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Directory Selector&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QTreeView" name="treeView"/>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QPushButton" name="sourceBtn">
+      <property name="text">
+       <string>Select source</string>
       </property>
      </widget>
     </item>

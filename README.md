@@ -1,16 +1,13 @@
 # CCA Folder Processor  
 
+## Version 2.0  
+
 Tool for automated processing of directories in Bitcurator.  
 
-Creates Archivematica-ready SIPs from folders on local filesystem, external media,
-and/or network shares, as well as a pre-populated description spreadsheet.  
+Creates Archivematica-ready SIPs from folders on local filesystem, external media, and/or network shares, as well as a pre-populated description spreadsheet.  
 
-User inputs single directory. Default behavior is to create a SIP of this source. 
-To create SIPs for each immediate child directory instead, pass the "-c" or 
-"--children" argument.  
+User selects folders to create SIPs from by checking appropriate boxes.  
 
-Will create metadata/checksum.md5 file saved in metadata directory by default. 
-To create bags instead, pass the "-b" or "--bagfiles" argument.  
+Will create md5deep-generated md5 manifest saved in metadata directory (for reading by Archivematica on transfer) by default. To create bags instead, select that option from the GUI interface.  
 
-To have Brunnhilde also complete a PII scan using bulk_extractor, pass the
-"-p" or "-piiscan" argument.
+Optionally also has Brunnhilde complete a PII scan using bulk_extractor.  
