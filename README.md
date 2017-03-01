@@ -14,7 +14,7 @@ CCA Folder Processor creates an md5deep-generated md5 checksum.md5 manifest save
 
 This utility is designed for easy use in Bitcurator, and requires installation of only:  
 * [PyQt4](https://www.riverbankcomputing.com/software/pyqt/download): `sudo apt-get install python-qt4`  
-* [Siegfried](https://github.com/richardlehane/siegfried/): Easy installation instructions on Github repo  
+* [Siegfried](https://github.com/richardlehane/siegfried/): See system-specific installation instructions on Github repo  
 * [Brunnhilde](https://github.com/timothyryanwalsh/brunnhilde): `sudo pip install brunnhilde`  
 
 To use the Folder Processor in other UNIX-like environments, make sure you also have installed:  
