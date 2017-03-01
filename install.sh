@@ -8,7 +8,6 @@ if [ ! -d /usr/share/cca-folderprocessor ]; then
 fi
 
 # Move files into /usr/share/cca-folderprocessor
-sudo mv folderprocessor.py /usr/share/cca-folderprocessor
 sudo mv main.py /usr/share/cca-folderprocessor
 sudo mv launch /usr/share/cca-folderprocessor
 sudo mv design.py /usr/share/cca-folderprocessor
