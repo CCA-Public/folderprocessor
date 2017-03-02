@@ -1,2 +1,2 @@
 #!/bin/bash
-python /usr/share/cca-folderprocessor/main.py
+python /usr/share/ccatools/folderprocessor/main.py
