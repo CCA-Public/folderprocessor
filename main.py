@@ -272,7 +272,8 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         for index,value in self.model.checks.items():
             if value.toBool():
                 if os.path.isdir(self.model.filePath(index)):
-                    dirs_to_process.append(str(self.model.filePath(index)))
+                    unicode_dirname = unicode(self.model.filePath(index).toUtf8(), encoding="utf-8")
+                    dirs_to_process.append(unicode_dirname)
 
         # prepare progress bar
         self.progressBar.setMaximum(len(dirs_to_process)+1)
