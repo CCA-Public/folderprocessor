@@ -20,3 +20,4 @@ To use the Folder Processor in other UNIX-like environments, make sure you also 
 * md5deep  
 * bagit-python  
 * bulk_extractor (optional) 
+* [Digital Forensics XML Library](https://github.com/simsong/dfxml): You will also need to change the path to dfxml/python in line 26 of main.py.  
