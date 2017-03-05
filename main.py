@@ -22,6 +22,10 @@ from time import localtime, strftime
 
 import design
 
+#import Objects.py from python dfxml tools
+sys.path.append('/Users/twalsh/dfxml/python')
+import Objects
+
 class CheckableDirModel(QDirModel):
     # class to put checkbox on the folders
     def __init__(self, parent=None):
@@ -92,6 +96,9 @@ class SIPThread(QThread):
         else: # brunnhilde without bulk_extractor
             subprocess.call("brunnhilde.py -zw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
 
+        # create dfxml and write to submissionDocumentation
+        subprocess.call("md5deep -rd %s > %s" % (object_dir, os.path.join(subdoc_dir, 'dfxml.xml')), shell=True)
+
         # write checksums
         if bagfiles == True: # bag entire SIP
             subprocess.call("bagit.py --processes 4 '%s'" % sip_dir, shell=True)
@@ -141,27 +148,34 @@ class SIPThread(QThread):
             # test if entry if directory
             if os.path.isdir(item):
             
-                # gather info from files
-                if bagfiles == True:
-                    objects = os.path.abspath(os.path.join(item, 'data', 'objects'))
-                else:
-                    objects = os.path.abspath(os.path.join(item, 'objects'))
-
+                # intialize values
                 number_files = 0
                 total_bytes = 0
-                mdates = []
+                mtimes = []
 
-                for root, directories, filenames in os.walk(objects):
-                    for filename in filenames:
-                        # add to file count
-                        number_files += 1
-                        # add number of bytes to total
-                        filepath = os.path.join(root, filename)
-                        total_bytes += os.path.getsize(filepath)
-                        # add modified date to list
-                        modified = os.path.getmtime(filepath)
-                        modified_date = str(datetime.datetime.fromtimestamp(modified))
-                        mdates.append(modified_date)
+                # parse dfxml file
+                if bagfiles == True:
+                    dfxml_file = os.path.abspath(os.path.join(item, 'data', 'metadata', 'submissionDocumentation', 'dfxml.xml'))
+                else:
+                    dfxml_file = os.path.abspath(os.path.join(item, 'metadata', 'submissionDocumentation', 'dfxml.xml'))
+
+                # gather info for each FileObject
+                for (event, obj) in Objects.iterparse(dfxml_file):
+                    
+                    # only work on FileObjects
+                    if not isinstance(obj, Objects.FileObject):
+                        continue
+                    
+                    # gather info
+                    number_files += 1
+
+                    mtime = obj.mtime
+                    if not mtime:
+                        mtime = ''
+                    mtime = str(mtime)
+                    mtimes.append(mtime)
+            
+                    total_bytes += obj.filesize
 
                 # build extent statement
                 size_readable = self.convert_size(total_bytes)
@@ -173,9 +187,9 @@ class SIPThread(QThread):
                     extent = "%d digital files (%s)" % (number_files, size_readable)
 
                 # build date statement
-                if mdates:
-                    date_earliest = min(mdates)[:10]
-                    date_latest = max(mdates)[:10]
+                if mtimes:
+                    date_earliest = min(mtimes)[:10]
+                    date_latest = max(mtimes)[:10]
                 else:
                     date_earliest = 'N/A'
                     date_latest = 'N/A'
