@@ -23,7 +23,7 @@ from time import localtime, strftime
 import design
 
 #import Objects.py from python dfxml tools
-sys.path.append('/Users/twalsh/dfxml/python')
+sys.path.append('/usr/share/dfxml/python')
 import Objects
 
 class CheckableDirModel(QDirModel):
