@@ -97,7 +97,7 @@ class SIPThread(QThread):
             subprocess.call("brunnhilde.py -zw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
 
         # create dfxml and write to submissionDocumentation
-        subprocess.call("md5deep -rd %s > %s" % (object_dir, os.path.join(subdoc_dir, 'dfxml.xml')), shell=True)
+        subprocess.call("md5deep -rd '%s' > '%s'" % (object_dir, os.path.join(subdoc_dir, 'dfxml.xml')), shell=True)
 
         # write checksums
         if bagfiles == True: # bag entire SIP
