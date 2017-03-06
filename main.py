@@ -72,8 +72,8 @@ class SIPThread(QThread):
     def create_sip(self, source, destination, bagfiles, piiscan):
         
         # set paths and create dirs
-        basename = os.path.basename(os.path.abspath(source))
-        sip_dir = os.path.join(destination, basename)
+        basename = os.path.basename(os.path.abspath(self.source))
+        sip_dir = os.path.join(self.destination, basename)
         object_dir = os.path.join(sip_dir, 'objects')
         original_dir = os.path.join(object_dir, basename)
         metadata_dir = os.path.join(sip_dir, 'metadata')
@@ -84,14 +84,14 @@ class SIPThread(QThread):
 
         # copy files
         try:
-            shutil.copytree(source, original_dir, symlinks=False, ignore=None)
+            shutil.copytree(self.source, original_dir, symlinks=False, ignore=None)
         except:
-            print("WARNING: Error copying files from " + source + " to " + original_dir) #TODO improve error handling
+            print("WARNING: Error copying files from " + self.source + " to " + original_dir) #TODO improve error handling
 
         # run brunnhilde and write to submissionDocumentation directory
         files_abs = os.path.abspath(object_dir)
 
-        if piiscan == True: # brunnhilde with bulk_extractor
+        if self.piiscan == True: # brunnhilde with bulk_extractor
             subprocess.call("brunnhilde.py -zbw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
         else: # brunnhilde without bulk_extractor
             subprocess.call("brunnhilde.py -zw '%s' '%s' '%s_brunnhilde'" % (files_abs, subdoc_dir, basename), shell=True)
@@ -100,7 +100,7 @@ class SIPThread(QThread):
         subprocess.call("md5deep -rd %s > %s" % (object_dir, os.path.join(subdoc_dir, 'dfxml.xml')), shell=True)
 
         # write checksums
-        if bagfiles == True: # bag entire SIP
+        if self.bagfiles == True: # bag entire SIP
             subprocess.call("bagit.py --processes 4 '%s'" % sip_dir, shell=True)
         else: # write metadata/checksum.md5
             subprocess.call("cd '%s' && md5deep -rl ../objects > checksum.md5" % metadata_dir, shell=True)
