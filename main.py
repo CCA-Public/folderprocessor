@@ -12,8 +12,6 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import * 
 import csv
 import datetime
-import itertools
-import math
 import os
 import shutil
 import subprocess
@@ -109,35 +107,27 @@ class SIPThread(QThread):
         subprocess.call("find '%s' -type d -exec chmod 755 {} \;" % sip_dir, shell=True)
         subprocess.call("find '%s' -type f -exec chmod 644 {} \;" % sip_dir, shell=True)
 
-    def convert_size(self, size):
-        # convert size to human-readable form
-        if size == 0:
-            return '0 bytes'
-        size_name = ("bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
-        i = int(math.floor(math.log(size,1024)))
-        p = math.pow(1024,i)
-        s = round(size/p)
-        s = str(s)
-        s = s.replace('.0', '')
-        return '%s %s' % (s,size_name[i])
-
     def create_spreadsheet(self, output_dir, sips, bagfiles):
 
+        spreadsheet_path = os.path.join(destination, 'description.csv')
         # open description spreadsheet
         try:
-            spreadsheet = open(os.path.join(output_dir,'description.csv'), 'w')
+            spreadsheet = open(spreadsheet_path, 'w')
             writer = csv.writer(spreadsheet, quoting=csv.QUOTE_NONNUMERIC)
             header_list = ['Parent ID', 'Identifier', 'Title', 'Archive Creator', 'Date expression', 'Date start', 'Date end', 
-        'Level of description', 'Extent and medium', 'Scope and content', 'Arrangement (optional)', 'Accession number', 
-        'Appraisal, destruction, and scheduling information (optional)', 'Name access points (optional)', 
-        'Geographic access points (optional)', 'Conditions governing access (optional)', 'Conditions governing reproduction (optional)', 
-        'Language of material (optional)', 'Physical characteristics & technical requirements affecting use (optional)', 
-        'Finding aids (optional)', 'Related units of description (optional)', 'Archival history (optional)', 
-        'Immediate source of acquisition or transfer (optional)', "Archivists' note (optional)", 'General note (optional)', 
-        'Description status']
+                            'Level of description', 'Extent and medium', 'Scope and content', 'Arrangement (optional)', 'Accession number', 
+                            'Appraisal, destruction, and scheduling information (optional)', 'Name access points (optional)', 
+                            'Geographic access points (optional)', 'Conditions governing access (optional)', 'Conditions governing reproduction (optional)', 
+                            'Language of material (optional)', 'Physical characteristics & technical requirements affecting use (optional)', 
+                            'Finding aids (optional)', 'Related units of description (optional)', 'Archival history (optional)', 
+                            'Immediate source of acquisition or transfer (optional)', "Archivists' note (optional)", 'General note (optional)', 
+                            'Description status']
             writer.writerow(header_list)
         except:
             sys.exit('There was an error creating the processing spreadsheet.')
+
+        # close description spreadsheet
+        spreadsheet.close()
 
         # add info to description spreadsheet
         for item in os.listdir(sips):
@@ -148,82 +138,11 @@ class SIPThread(QThread):
             # test if entry if directory
             if os.path.isdir(item):
             
-                # intialize values
-                number_files = 0
-                total_bytes = 0
-                mtimes = []
+            if bagfiles == True:
+                subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py -b %s %s" % (item, spreadsheet_path), shell=True)
+            else:
+                subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py %s %s" % (item, spreadsheet_path), shell=True)
 
-                # parse dfxml file
-                if bagfiles == True:
-                    dfxml_file = os.path.abspath(os.path.join(item, 'data', 'metadata', 'submissionDocumentation', 'dfxml.xml'))
-                else:
-                    dfxml_file = os.path.abspath(os.path.join(item, 'metadata', 'submissionDocumentation', 'dfxml.xml'))
-
-                # gather info for each FileObject
-                for (event, obj) in Objects.iterparse(dfxml_file):
-                    
-                    # only work on FileObjects
-                    if not isinstance(obj, Objects.FileObject):
-                        continue
-                    
-                    # gather info
-                    number_files += 1
-
-                    mtime = obj.mtime
-                    if not mtime:
-                        mtime = ''
-                    mtime = str(mtime)
-                    mtimes.append(mtime)
-            
-                    total_bytes += obj.filesize
-
-                # build extent statement
-                size_readable = self.convert_size(total_bytes)
-                if number_files == 1:
-                    extent = "1 digital file (%s)" % size_readable
-                elif number_files == 0:
-                    extent = "EMPTY"
-                else:
-                    extent = "%d digital files (%s)" % (number_files, size_readable)
-
-                # build date statement
-                if mtimes:
-                    date_earliest = min(mtimes)[:10]
-                    date_latest = max(mtimes)[:10]
-                else:
-                    date_earliest = 'N/A'
-                    date_latest = 'N/A'
-                if date_earliest == date_latest:
-                    date_statement = '%s' % date_earliest[:4]
-                else:
-                    date_statement = '%s - %s' % (date_earliest[:4], date_latest[:4])
-
-                # gather info from burnnhilde & write scope and content note
-                if extent == 'EMPTY':
-                    scopecontent = ''
-                else:
-                    fileformats = []
-                    if bagfiles == True:
-                        fileformat_csv = os.path.join(item, 'data', 'metadata', 'submissionDocumentation', '%s_brunnhilde' % os.path.basename(item), 'csv_reports', 'formats.csv')
-                    else:
-                        fileformat_csv = os.path.join(item, 'metadata', 'submissionDocumentation', '%s_brunnhilde' % os.path.basename(item), 'csv_reports', 'formats.csv')
-                    with open(fileformat_csv, 'r') as f:
-                        reader = csv.reader(f)
-                        reader.next()
-                        for row in itertools.islice(reader, 5):
-                            fileformats.append(row[0])
-                    fileformats = [element or 'Unidentified' for element in fileformats] # replace empty elements with 'Unidentified'
-                    formatlist = ', '.join(fileformats) # format list of top file formats as human-readable
-                    
-                    # create scope and content note
-                    scopecontent = 'Files from directory titled "%s". Most common file formats: %s' % (os.path.basename(item), formatlist)
-
-                # write csv row
-                writer.writerow(['', item, '', '', date_statement, date_earliest, date_latest, 'File', extent, 
-                    scopecontent, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''])
-
-        # close description spreadsheet
-        spreadsheet.close()
 
     def run(self):
         for dir_to_process in self.dirs_to_process:
