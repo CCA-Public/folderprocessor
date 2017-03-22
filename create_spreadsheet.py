@@ -105,7 +105,7 @@ def write_to_spreadsheet(sip_dir, spreadsheet_path, bagfiles):
         formatlist = ', '.join(fileformats) # format list of top file formats as human-readable
         
         # create scope and content note
-        scopecontent = 'Most common file formats: %s' % (formatlist)
+        scopecontent = 'Original directory name: "%s". Most common file formats: %s' % (os.basename(sip_dir), formatlist)
 
     # write csv row
     writer.writerow(['', os.path.basename(sip_dir), '', '', date_statement, date_earliest, date_latest, 'File', extent, 
