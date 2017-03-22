@@ -123,12 +123,9 @@ parser.add_argument("sip_dir", help="SIP to gather information about")
 parser.add_argument("spreadsheet_path", help="Path to CSV")
 args = parser.parse_args()
 
-sip_dir = args.sip_dir
-spreadsheet_path = args.spreadsheet_path
-
 bagfiles = False
 if args.bagfiles:
     bagfiles = True
 
 # call create_spreadsheet
-create_spreadsheet(args.sip_dir, args.spreadsheet_path, bagfiles)
+write_to_spreadsheet(args.sip_dir, args.spreadsheet_path, bagfiles)
