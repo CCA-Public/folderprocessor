@@ -14,3 +14,5 @@ CCA Folder Processor creates an md5deep-generated checksum.md5 manifest saved in
 
 This utility is designed for easy use in Bitcurator, and in v1.8.0+ requires installation of only [PyQt4](https://www.riverbankcomputing.com/software/pyqt/download): 
 `sudo apt-get install python-qt4`  
+
+Alternatively, install all of the CCA Tools (and PyQT4) using the install script in the [CCA Tools repo](https://github.com/timothyryanwalsh/cca-tools).  
