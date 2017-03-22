@@ -138,10 +138,10 @@ class SIPThread(QThread):
             # test if entry if directory
             if os.path.isdir(item):
             
-            if bagfiles == True:
-                subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py -b %s %s" % (item, spreadsheet_path), shell=True)
-            else:
-                subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py %s %s" % (item, spreadsheet_path), shell=True)
+                if bagfiles == True:
+                    subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py -b %s %s" % (item, spreadsheet_path), shell=True)
+                else:
+                    subprocess.call("python3 /usr/share/ccatools/folderprocessor/create_spreadsheet.py %s %s" % (item, spreadsheet_path), shell=True)
 
 
     def run(self):
