@@ -15,6 +15,7 @@ fi
 # Move files into /usr/share/ccatools/folderprocessor
 sudo mv main.py /usr/share/ccatools/folderprocessor
 sudo mv launch /usr/share/ccatools/folderprocessor
+sudo mv create_spreadsheet.py /usr/share/ccatools/folderprocessor
 sudo mv design.py /usr/share/ccatools/folderprocessor
 sudo mv design.ui /usr/share/ccatools/folderprocessor
 sudo mv icon.png /usr/share/ccatools/folderprocessor
