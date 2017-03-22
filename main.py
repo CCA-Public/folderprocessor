@@ -109,7 +109,7 @@ class SIPThread(QThread):
 
     def create_spreadsheet(self, output_dir, sips, bagfiles):
 
-        spreadsheet_path = os.path.join(destination, 'description.csv')
+        spreadsheet_path = os.path.join(output_dir, 'description.csv')
         # open description spreadsheet
         try:
             spreadsheet = open(spreadsheet_path, 'w')
