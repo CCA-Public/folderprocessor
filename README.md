@@ -1,6 +1,6 @@
 # CCA Folder Processor  
 
-Tool for automated processing of directories in Bitcurator.  
+Tool for automated processing of directories in BitCurator.  
 
 **NOTE: This tool is in dev and should not be considered production-ready without testing**
 
