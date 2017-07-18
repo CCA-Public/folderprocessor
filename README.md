@@ -1,4 +1,4 @@
-# CCA Folder Processor  
+# Folder Processor  
 
 Tool for automated processing of directories in BitCurator.  
 
