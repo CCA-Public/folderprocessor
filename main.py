@@ -103,13 +103,13 @@ class SIPThread(QThread):
 
         # write checksums
         if bagfiles == True: # bag entire SIP
-            subprocess.call("bagit.py --processes 4 '%s'" % sip_dir, shell=True)
+            subprocess.call("bagit.py --processes 4 '%s'" % (sip_dir), shell=True)
         else: # write metadata/checksum.md5
-            subprocess.call("cd '%s' && md5deep -rl ../objects > checksum.md5" % metadata_dir, shell=True)
+            subprocess.call("cd '%s' && md5deep -rl ../objects > checksum.md5" % (metadata_dir), shell=True)
 
         # modify file permissions
-        subprocess.call("find '%s' -type d -exec chmod 755 {} \;" % sip_dir, shell=True)
-        subprocess.call("find '%s' -type f -exec chmod 644 {} \;" % sip_dir, shell=True)
+        subprocess.call("find '%s' -type d -exec chmod 755 {} \;" % (sip_dir), shell=True)
+        subprocess.call("find '%s' -type f -exec chmod 644 {} \;" % (sip_dir), shell=True)
 
     def create_spreadsheet(self, output_dir, sips, bagfiles):
 
