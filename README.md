@@ -24,4 +24,4 @@ Install all of the CCA Tools together using the installation script in the [CCA 
 * Clone this repo to your local machine.  
 * Run the install script with sudo privileges:  
 `chmod u+x install.sh`  
-`sudo ./install.sh`ssss
+`sudo ./install.sh`
