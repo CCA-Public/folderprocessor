@@ -203,12 +203,12 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         self.processBtn.setEnabled(True)
         self.progressBar.setValue(self.progressBar.value()+1)
         QMessageBox.information(self, "Done!", "Process complete.")
-        self.status.setText('Finished')
+        self.status.setText('Completed')
         self.progressBar.setValue(0)
 
     def start_processing(self):
         # acknowledge process has started
-        self.status.setText('Processing')
+        self.status.setText('Processing. Please be patient.')
 
         # create list of paths for checked folders
         dirs_to_process = []
