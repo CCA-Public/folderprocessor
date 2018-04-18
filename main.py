@@ -176,7 +176,7 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
 
     def about_dialog(self):
         QMessageBox.information(self, "About", 
-            "Folder Processor v0.2.0\nCanadian Centre for Architecture, 2017\nMIT License\nhttps://github.com/timothyryanwalsh/cca-folderprocessor")
+            "Folder Processor v1.0.0\nCanadian Centre for Architecture\nDeveloper: Tim Walsh\n2018\nMIT License\nhttps://github.com/CCA-Public/cca-folderprocessor")
 
     def browse_source(self):
         source = QFileDialog.getExistingDirectory(self, "Select folder")
