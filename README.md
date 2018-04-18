@@ -20,7 +20,7 @@ Install all of the CCA Tools together using the installation script in the [CCA 
 
 ### Install as a separate utlity
 * Install [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download):  
-`sudo apt-get install python3-pyqt5`  
+`sudo pip3 install pyqt5`  
 * Clone this repo to your local machine.  
 * Run the install script with sudo privileges:  
 `chmod u+x install.sh`  
