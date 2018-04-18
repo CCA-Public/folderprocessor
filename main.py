@@ -58,7 +58,6 @@ class CheckableDirModel(QDirModel):
         return QDirModel.setData(self, index, value, role)
 
 class SIPThread(QThread):
-    increment_progress_bar = pyqtSignal('QString')
 
     def __init__(self, dirs_to_process, destination, bagfiles, piiscan, output_dir):
         QThread.__init__(self)
