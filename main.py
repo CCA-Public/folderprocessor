@@ -8,8 +8,9 @@ Tim Walsh 2017
 MIT License
 """
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import * 
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 import csv
 import datetime
 import os
@@ -26,6 +27,8 @@ import Objects
 
 class CheckableDirModel(QDirModel):
     # class to put checkbox on the folders
+    dataChanged = pyqtSignal(QModelIndex, QModelIndex)
+
     def __init__(self, parent=None):
         QDirModel.__init__(self, None)
         self.checks = {}
@@ -49,12 +52,13 @@ class CheckableDirModel(QDirModel):
     def setData(self, index, value, role):
         if (role == Qt.CheckStateRole and index.column() == 0):
             self.checks[index] = value
-            self.emit(SIGNAL("dataChanged(QModelIndex,QModelIndex)"), index, index)
+            self.dataChanged.emit(index, index)
             return True 
 
         return QDirModel.setData(self, index, value, role)
 
 class SIPThread(QThread):
+    increment_progress_bar = pyqtSignal('QString')
 
     def __init__(self, dirs_to_process, destination, bagfiles, piiscan, output_dir):
         QThread.__init__(self)
@@ -99,13 +103,13 @@ class SIPThread(QThread):
 
         # write checksums
         if bagfiles == True: # bag entire SIP
-            subprocess.call("bagit.py --processes 4 '%s'" % sip_dir, shell=True)
+            subprocess.call("bagit.py --processes 4 '%s'" % (sip_dir), shell=True)
         else: # write metadata/checksum.md5
-            subprocess.call("cd '%s' && md5deep -rl ../objects > checksum.md5" % metadata_dir, shell=True)
+            subprocess.call("cd '%s' && md5deep -rl ../objects > checksum.md5" % (metadata_dir), shell=True)
 
         # modify file permissions
-        subprocess.call("find '%s' -type d -exec chmod 755 {} \;" % sip_dir, shell=True)
-        subprocess.call("find '%s' -type f -exec chmod 644 {} \;" % sip_dir, shell=True)
+        subprocess.call("find '%s' -type d -exec chmod 755 {} \;" % (sip_dir), shell=True)
+        subprocess.call("find '%s' -type f -exec chmod 644 {} \;" % (sip_dir), shell=True)
 
     def create_spreadsheet(self, output_dir, sips, bagfiles):
 
@@ -147,7 +151,7 @@ class SIPThread(QThread):
     def run(self):
         for dir_to_process in self.dirs_to_process:
             self.create_sip(dir_to_process, self.destination, self.bagfiles, self.piiscan)
-            self.emit(SIGNAL('increment_progress_bar(QString)'), dir_to_process)
+            self.increment_progress_bar.emit(dir_to_process)
             self.create_spreadsheet(self.output_dir, self.destination, self.bagfiles)
 
 
@@ -172,7 +176,7 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
 
     def about_dialog(self):
         QMessageBox.information(self, "About", 
-            "Folder Processor v0.2.0\nCanadian Centre for Architecture, 2017\nMIT License\nhttps://github.com/timothyryanwalsh/cca-folderprocessor")
+            "Folder Processor v1.0.0\nCanadian Centre for Architecture\nDeveloper: Tim Walsh\n2018\nMIT License\nhttps://github.com/CCA-Public/cca-folderprocessor")
 
     def browse_source(self):
         source = QFileDialog.getExistingDirectory(self, "Select folder")
@@ -199,20 +203,19 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         self.processBtn.setEnabled(True)
         self.progressBar.setValue(self.progressBar.value()+1)
         QMessageBox.information(self, "Done!", "Process complete.")
-        self.status.setText('Finished')
+        self.status.setText('Completed')
         self.progressBar.setValue(0)
 
     def start_processing(self):
         # acknowledge process has started
-        self.status.setText('Processing')
+        self.status.setText('Processing. Please be patient.')
 
         # create list of paths for checked folders
         dirs_to_process = []
         for index,value in self.model.checks.items():
-            if value.toBool():
+            if value != 0:
                 if os.path.isdir(self.model.filePath(index)):
-                    unicode_dirname = unicode(self.model.filePath(index).toUtf8(), encoding="utf-8")
-                    dirs_to_process.append(unicode_dirname)
+                    dirs_to_process.append(self.model.filePath(index))
 
         # prepare progress bar
         self.progressBar.setMaximum(len(dirs_to_process)+1)
@@ -236,8 +239,8 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
 
         # create SIP for each item in list and spreadsheet describing all created SIPs
         self.get_thread = SIPThread(dirs_to_process, sips, bagfiles, piiscan, destination)
-        self.connect(self.get_thread, SIGNAL("increment_progress_bar(QString)"), self.increment_progress_bar)
-        self.connect(self.get_thread, SIGNAL("finished()"), self.done)
+        self.get_thread.increment_progress_bar['QString'].connect(self.increment_progress_bar)
+        self.get_thread.finished.connect(self.done)
         self.get_thread.start()
         self.cancelBtn.setEnabled(True)
         self.cancelBtn.clicked.connect(self.get_thread.terminate)
