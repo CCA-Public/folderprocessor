@@ -25,3 +25,7 @@ Install all of the CCA Tools together using the installation script in the [CCA 
 * Run the install script with sudo privileges:  
 `chmod u+x install.sh`  
 `sudo ./install.sh`
+
+### PyQt4 version
+
+Please note that SIP Creator v1.0.0 uses PyQt5. Installation of PyQt5 may cause issues with existing PyQt4 programs in BitCurator. For the a PyQt4 version of SIP Creator that will not affect the functionality of other tools, see the commit [efc3cee](https://github.com/CCA-Public/folderprocessor/tree/efc3cee46dbed05727c8c461232df7318a12c46d).
