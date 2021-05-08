@@ -4,7 +4,7 @@
 """
 CCA Folder Processor
 
-Tim Walsh 2017
+Tessa Walsh 2017
 MIT License
 """
 
