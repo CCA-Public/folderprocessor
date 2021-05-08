@@ -7,10 +7,13 @@ if [ ! -d /usr/share/ccatools ]; then
   sudo mkdir /usr/share/ccatools
 fi
 
-# Make /usr/share/ccatools/folderprocessor if doesn't already exist
-if [ ! -d /usr/share/ccatools/folderprocessor ]; then
-  sudo mkdir /usr/share/ccatools/folderprocessor
+# Delete /usr/share directory for Folder Processor if it already exists
+if [ -d /usr/share/ccatools/folderprocessor ]; then
+  sudo rm -rf /usr/share/ccatools/folderprocessor
 fi
+
+# Make /usr/share directory for Folder Processor
+sudo mkdir /usr/share/ccatools/folderprocessor
 
 # Move files into /usr/share/ccatools/folderprocessor
 sudo mv main.py /usr/share/ccatools/folderprocessor
