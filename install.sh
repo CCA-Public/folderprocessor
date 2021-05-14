@@ -19,14 +19,14 @@ fi
 sudo mkdir /usr/share/ccatools/folderprocessor
 
 # Move files into /usr/share/ccatools/folderprocessor
-sudo mv main.py /usr/share/ccatools/folderprocessor
-sudo mv launch /usr/share/ccatools/folderprocessor
-sudo mv create_spreadsheet.py /usr/share/ccatools/folderprocessor
-sudo mv design.py /usr/share/ccatools/folderprocessor
-sudo mv design.ui /usr/share/ccatools/folderprocessor
-sudo mv icon.png /usr/share/ccatools/folderprocessor
-sudo mv LICENSE /usr/share/ccatools/folderprocessor
-sudo mv README.md /usr/share/ccatools/folderprocessor
+sudo cp main.py /usr/share/ccatools/folderprocessor
+sudo cp launch /usr/share/ccatools/folderprocessor
+sudo cp create_spreadsheet.py /usr/share/ccatools/folderprocessor
+sudo cp design.py /usr/share/ccatools/folderprocessor
+sudo cp design.ui /usr/share/ccatools/folderprocessor
+sudo cp icon.png /usr/share/ccatools/folderprocessor
+sudo cp LICENSE /usr/share/ccatools/folderprocessor
+sudo cp README.md /usr/share/ccatools/folderprocessor
 sudo cp deps/dfxml/python/dfxml.py /usr/share/ccatools/folderprocessor
 sudo cp deps/dfxml/python/Objects.py /usr/share/ccatools/folderprocessor
 sudo cp deps/dfxml/python/walk_to_dfxml.py /usr/share/ccatools/folderprocessor
