@@ -2,25 +2,33 @@
 
 ### Install script for CCA Folder Processor in Bitcurator
 
+# Update submodules
+git submodule update --init --recursive
+
 # Make /usr/share/ccatools if doesn't already exist
 if [ ! -d /usr/share/ccatools ]; then
   sudo mkdir /usr/share/ccatools
 fi
 
-# Make /usr/share/ccatools/folderprocessor if doesn't already exist
-if [ ! -d /usr/share/ccatools/folderprocessor ]; then
-  sudo mkdir /usr/share/ccatools/folderprocessor
+# Delete /usr/share directory for Folder Processor if it already exists
+if [ -d /usr/share/ccatools/folderprocessor ]; then
+  sudo rm -rf /usr/share/ccatools/folderprocessor
 fi
 
+# Make /usr/share directory for Folder Processor
+sudo mkdir /usr/share/ccatools/folderprocessor
+
 # Move files into /usr/share/ccatools/folderprocessor
-sudo mv main.py /usr/share/ccatools/folderprocessor
-sudo mv launch /usr/share/ccatools/folderprocessor
-sudo mv create_spreadsheet.py /usr/share/ccatools/folderprocessor
-sudo mv design.py /usr/share/ccatools/folderprocessor
-sudo mv design.ui /usr/share/ccatools/folderprocessor
-sudo mv icon.png /usr/share/ccatools/folderprocessor
-sudo mv LICENSE /usr/share/ccatools/folderprocessor
-sudo mv README.md /usr/share/ccatools/folderprocessor
+sudo cp main.py /usr/share/ccatools/folderprocessor
+sudo cp launch /usr/share/ccatools/folderprocessor
+sudo cp design.py /usr/share/ccatools/folderprocessor
+sudo cp design.ui /usr/share/ccatools/folderprocessor
+sudo cp icon.png /usr/share/ccatools/folderprocessor
+sudo cp LICENSE /usr/share/ccatools/folderprocessor
+sudo cp README.md /usr/share/ccatools/folderprocessor
+sudo cp deps/dfxml/python/dfxml.py /usr/share/ccatools/folderprocessor
+sudo cp deps/dfxml/python/Objects.py /usr/share/ccatools/folderprocessor
+sudo cp deps/dfxml/python/walk_to_dfxml.py /usr/share/ccatools/folderprocessor
 
 # Make "CCA Tools" folder on Desktop if doesn't already exist
 if [ ! -d "/home/bcadmin/Desktop/CCA Tools" ]; then
