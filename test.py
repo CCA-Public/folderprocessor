@@ -73,7 +73,7 @@ def test_create_sip_bagged(tmp_path):
 	bag = bagit.Bag(SIP_DIR)
 	assert bag.validate()
 
-	assert not os.path.isfile(METADATA_DIR, "checksum.md5")
+	assert not os.path.isfile(os.path.join(METADATA_DIR, "checksum.md5"))
 
 
 def test_bulk_extractor(tmp_path):
