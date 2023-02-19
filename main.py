@@ -3,7 +3,7 @@ CCA Folder Processor
 
 (c) Canadian Centre for Architecture
 Developed by Tessa Walsh
-2017-2021
+2017-2023
 MIT License
 """
 import csv
@@ -329,7 +329,7 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         QMessageBox.information(
             self,
             "About",
-            "Folder Processor v1.0.0\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2021\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
+            "Folder Processor v1.1.0\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2023\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
         )
 
     def browse_source(self):

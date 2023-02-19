@@ -2,7 +2,7 @@
 
 Tool for automated processing of directories in BitCurator.  
 
-Version: 1.0.0
+Version: 1.1.0
 
 CCA Folder Processor creates Archivematica-ready SIPs from directories on a local filesystem, piece of external media, or network shares, and generates a pre-populated description spreadsheet containing information such as start and end dates, extents, and a scope and content note for each created SIP.
 
@@ -23,9 +23,4 @@ Install all of the CCA Tools together using the installation script in the [CCA 
 `sudo pip3 install pyqt5`  
 * Clone this repo to your local machine.  
 * Run the install script with sudo privileges:  
-`chmod u+x install.sh`  
 `sudo ./install.sh`
-
-### PyQt4 version
-
-Please note that Folder Processor v1.0.0 uses PyQt5. Installation of PyQt5 may cause issues with existing PyQt4 programs in BitCurator. For the a PyQt4 version of Folder Processor that will not affect the functionality of other tools, see the commit [efc3cee](https://github.com/CCA-Public/folderprocessor/tree/efc3cee46dbed05727c8c461232df7318a12c46d).
