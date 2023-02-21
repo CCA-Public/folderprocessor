@@ -8,7 +8,7 @@ if [ ! -d /usr/share/ccatools ]; then
   sudo mkdir /usr/share/ccatools
 fi
 
-folderprocessor_dir="/usr/share/ccatools/folderprocessor"
+folderprocessor_dir="/usr/share/ccatools/folderprocessor/"
 
 if [ -d $folderprocessor_dir ]; then
   sudo rm -rf $folderprocessor_dir
