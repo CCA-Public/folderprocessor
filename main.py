@@ -64,7 +64,7 @@ def convert_size(size):
     s = round(size / p)
     s = str(s)
     s = s.replace(".0", "")
-    return "%s %s".format(s, size_name[i])
+    return "{} {}".format(s, size_name[i])
 
 
 class CheckableDirModel(QDirModel):
