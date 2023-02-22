@@ -1,54 +1,46 @@
 #!/bin/bash
 
-### Install script for CCA Folder Processor in Bitcurator
+### Install script for CCA Disk Image Processor in Bitcurator 4/Ubuntu 22
 
-# Update submodules
 git submodule update --init --recursive
 
-# Make /usr/share/ccatools if doesn't already exist
 if [ ! -d /usr/share/ccatools ]; then
   sudo mkdir /usr/share/ccatools
 fi
 
-# Delete /usr/share directory for Folder Processor if it already exists
-if [ -d /usr/share/ccatools/folderprocessor ]; then
-  sudo rm -rf /usr/share/ccatools/folderprocessor
+folderprocessor_dir="/usr/share/ccatools/folderprocessor/"
+
+if [ -d $folderprocessor_dir ]; then
+  sudo rm -rf $folderprocessor_dir
 fi
 
-# Make /usr/share directory for Folder Processor
-sudo mkdir /usr/share/ccatools/folderprocessor
+sudo mkdir $folderprocessor_dir
 
-# Move files into /usr/share/ccatools/folderprocessor
-sudo cp main.py /usr/share/ccatools/folderprocessor
-sudo cp launch /usr/share/ccatools/folderprocessor
-sudo cp design.py /usr/share/ccatools/folderprocessor
-sudo cp design.ui /usr/share/ccatools/folderprocessor
-sudo cp icon.png /usr/share/ccatools/folderprocessor
-sudo cp LICENSE /usr/share/ccatools/folderprocessor
-sudo cp README.md /usr/share/ccatools/folderprocessor
-sudo cp deps/dfxml/python/dfxml.py /usr/share/ccatools/folderprocessor
-sudo cp deps/dfxml/python/Objects.py /usr/share/ccatools/folderprocessor
-sudo cp deps/dfxml/python/walk_to_dfxml.py /usr/share/ccatools/folderprocessor
-
-# Make "CCA Tools" folder on Desktop if doesn't already exist
-if [ ! -d "/home/bcadmin/Desktop/CCA Tools" ]; then
-  sudo mkdir "/home/bcadmin/Desktop/CCA Tools"
-fi
+sudo cp main.py $folderprocessor_dir
+sudo cp launch $folderprocessor_dir
+sudo cp design.py $folderprocessor_dir
+sudo cp design.ui $folderprocessor_dir
+sudo cp icon.png $folderprocessor_dir
+sudo cp LICENSE $folderprocessor_dir
+sudo cp README.md $folderprocessor_dir
+sudo cp deps/dfxml/python/dfxml.py $folderprocessor_dir
+sudo cp deps/dfxml/python/Objects.py $folderprocessor_dir
+sudo cp deps/dfxml/python/walk_to_dfxml.py $folderprocessor_dir
 
 # Create launch.desktop file
-sudo touch '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo '[Desktop Entry]' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Type=Application' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Name=Folder Processor' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Exec=/usr/share/ccatools/folderprocessor/launch' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
-echo 'Icon=/usr/share/ccatools/folderprocessor/icon.png' | sudo tee --append '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
+launch_file="/usr/share/applications/FolderProcessor.desktop"
 
-# Change permissions, ownership for CCA Tools
-sudo chown -R bcadmin:bcadmin '/home/bcadmin/Desktop/CCA Tools'
-sudo chown -R bcadmin:bcadmin '/usr/share/ccatools/folderprocessor'
-sudo find '/home/bcadmin/Desktop/CCA Tools' -type d -exec chmod 755 {} \;
-sudo find '/home/bcadmin/Desktop/CCA Tools' -type f -exec chmod 644 {} \;
+if [ -f $launch_file ]; then
+  sudo rm -rf $launch_file
+fi
 
-# Make files executable
-sudo chmod u+x '/home/bcadmin/Desktop/CCA Tools/Folder Processor.desktop'
+sudo touch $launch_file
+echo '[Desktop Entry]' | sudo tee --append $launch_file
+echo 'Type=Application' | sudo tee --append $launch_file
+echo 'Name=Folder Processor' | sudo tee --append $launch_file
+echo 'Exec=/usr/share/ccatools/folderprocessor/launch' | sudo tee --append $launch_file
+echo 'Icon=/usr/share/ccatools/folderprocessor/icon.png' | sudo tee --append $launch_file
+echo 'Categories=Forensics and Reporting' | sudo tee --append $launch_file
+
+sudo chown -R bcadmin:bcadmin $folderprocessor_dir
 sudo chmod u+x /usr/share/ccatools/folderprocessor/launch

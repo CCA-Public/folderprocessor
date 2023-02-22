@@ -3,7 +3,7 @@ CCA Folder Processor
 
 (c) Canadian Centre for Architecture
 Developed by Tessa Walsh
-2017-2021
+2017-2023
 MIT License
 """
 import csv
@@ -64,7 +64,7 @@ def convert_size(size):
     s = round(size / p)
     s = str(s)
     s = s.replace(".0", "")
-    return "%s %s".format(s, size_name[i])
+    return "{} {}".format(s, size_name[i])
 
 
 class CheckableDirModel(QDirModel):
@@ -159,7 +159,10 @@ class SIPThread(QThread):
 
         # Bag files or write checksum manifest.
         if bag_files:
-            subprocess.call("bagit.py --processes 4 '{}'".format(sip_dir), shell=True)
+            # TODO: Multithread bagging via --processes when bug described at
+            # https://github.com/LibraryOfCongress/bagit-python/issues/130 is
+            # resolved.
+            subprocess.call("cd ~ && bagit.py '{}'".format(sip_dir), shell=True)
         else:
             md5deep_cmd = "cd '{}' && md5deep -rl ../objects > checksum.md5".format(
                 metadata_dir
@@ -227,8 +230,8 @@ class SIPThread(QThread):
         if mtimes:
             date_earliest = min(mtimes)[:10]
             date_latest = max(mtimes)[:10]
-        date_statement = "{} - {}".format(date_earliest[:4], date_latest[:4])
-        if date_earliest == date_latest:
+        date_statement = "{}-{}".format(date_earliest[:4], date_latest[:4])
+        if date_earliest[:4] == date_latest[:4]:
             date_statement = date_earliest[:4]
 
         # Write scope and content note from information in brunnhilde reports.
@@ -329,7 +332,7 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         QMessageBox.information(
             self,
             "About",
-            "Folder Processor v1.0.0\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2021\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
+            "Folder Processor v1.1.0\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2023\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
         )
 
     def browse_source(self):
