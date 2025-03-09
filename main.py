@@ -209,6 +209,8 @@ class SIPThread(QThread):
         for (event, obj) in Objects.iterparse(dfxml_file):
             if not isinstance(obj, Objects.FileObject):
                 continue
+            if obj.is_dir():
+                continue
             file_count += 1
             mtime = ""
             if obj.mtime:
@@ -332,7 +334,7 @@ class ProcessorApp(QMainWindow, design.Ui_MainWindow):
         QMessageBox.information(
             self,
             "About",
-            "Folder Processor v1.1.1\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2023\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
+            "Folder Processor v1.1.2\nCanadian Centre for Architecture\nDeveloper: Tessa Walsh\n2018-2023\nMIT License\nhttps://github.com/CCA-Public/folderprocessor",
         )
 
     def browse_source(self):

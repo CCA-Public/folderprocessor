@@ -2,7 +2,7 @@
 
 Tool for automated processing of directories in BitCurator.  
 
-Version: 1.1.1
+Version: 1.1.2
 
 CCA Folder Processor creates Archivematica-ready SIPs from directories on a local filesystem, piece of external media, or network shares, and generates a pre-populated description spreadsheet containing information such as start and end dates, extents, and a scope and content note for each created SIP.
 
